@@ -20,7 +20,7 @@ def generateRandomData(dataPoints, dims):
     # Parameters for the normal generator
     mean = 0
     var = 1
-    data = np.random.normal(loc=mean, scale =var, size=dimensions)
+    data = np.random.normal(loc=mean, scale=var, size=dimensions)
     print('The shape of our data vector is: \n', data.shape)
 
     # Initialize the weight vectors as zeros
@@ -49,3 +49,4 @@ def generateRandomData(dataPoints, dims):
     print('The shape of our labeled data is: \n', labeledData.shape)
 
     return labeledData, weightVector
+
