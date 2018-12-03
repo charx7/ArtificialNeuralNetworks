@@ -25,11 +25,11 @@ def generateRandomData(dataPoints, dims):
 
     # Initialize the weight vectors as zeros
     weightVector = np.zeros((dims,1))
-    print('The shape of our weights vector is: \n', weightVector.shape)
+    #print('The shape of our weights vector is: \n', weightVector.shape)
 
     # Now for the labels
     s = np.random.uniform(0,1,examples)
-    print('The shape of our uniform vector is: \n', s.shape)
+    #print('The shape of our uniform vector is: \n', s.shape)
 
     # Initialize an empty numpy array
     labels = np.array([])
@@ -40,13 +40,13 @@ def generateRandomData(dataPoints, dims):
         else:
             labels = np.hstack((labels, -1))
 
-    print('The shape of our labels is: \n', labels.shape)
+    #print('The shape of our labels is: \n', labels.shape)
     verticalLabels = labels.reshape((examples, 1))
-    print('The shape of our labels to attach is: \n', verticalLabels.shape)
+    #print('The shape of our labels to attach is: \n', verticalLabels.shape)
 
     # Attach the labels to the randomly generated dataz
     labeledData = np.hstack((data, verticalLabels))
-    print('The shape of our labeled data is: \n', labeledData.shape)
+    #print('The shape of our labeled data is: \n', labeledData.shape)
 
     return labeledData, weightVector
 
