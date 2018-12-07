@@ -2,8 +2,8 @@ from generateRandomData import generateRandomData
 from testDataGeneration import plotData
 import numpy as np
 from matplotlib import pyplot as plt
-# X datapoints in Y dimenions
-data, weights = generateRandomData(10,2)
+# X datapoints in Y dimensions
+data, weights = generateRandomData(5,2)
 epochs = 10 # Number of epochs
 learnRate = 1 / 2
 
@@ -18,6 +18,8 @@ def calculateError(weights, data):
             errors = errors + 1
 
     return 1-errors/numberOfPoints
+
+
 
 accuracies = []
 
