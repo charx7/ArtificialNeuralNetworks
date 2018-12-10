@@ -35,15 +35,15 @@ for i, P in enumerate(P_values):
         epochs = 5
         learning_rate = 0.5
         for trial in range(1, n_d):
-            data, weights = generateRandomData(P, N)
+            data, weights = generateRandomData(N, P)
             # the result of classify() is either 0 or 1
-            success_counter = success_counter + classify(data,epochs,learning_rate)
+            success_counter = success_counter + classify(data,epochs,learning_rate, P)
 
         Q[i,j] = success_counter/n_d #this describes the probability of sucessful classification for P = i and alpha = j
 
 plt.figure()
-plt.plot(alphas, Q[1])
-plt.title("Separation probability based on α")
-plt.xlabel("α = P/N")
+plt.plot(alphas, Q[0])
+plt.title("Separation probability based on alpha")
+plt.xlabel("alpha = P/N")
 plt.ylabel("probability of separation")
 plt.show()

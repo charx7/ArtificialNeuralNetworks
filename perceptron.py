@@ -9,15 +9,18 @@ import numpy as np
 # from matplotlib import pyplot as plt
 
 
-def calculateError(weights, data, dims):
+def calculateAccuracy(weights, data, dims):
     errors = 0
     numberOfPoints = data.shape[0]
     for iter in range(numberOfPoints):
         currentPoint = data[iter][0:dims].reshape(1, dims)
         currentLabel = data[iter][dims]
-        localPotential = np.dot(weights.flatten(), currentPoint.flatten()) * currentLabel
-        if np.sign(localPotential)!=np.sign(currentLabel):
-            errors = errors + 1
+        # localPotential = np.dot(weights.flatten(), currentPoint.flatten())
+        classification = np.sign(np.dot(weights.flatten(), currentPoint.flatten()))
+        # print('The classification label is: ',classification)
+        # print('The correct label is: ', np.sign(currentLabel))
+        if classification != np.sign(currentLabel):
+             errors = errors + 1
 
     return 1-errors/numberOfPoints
 
@@ -37,7 +40,8 @@ def classify(data, epochs, learning_rate, dims):
             if localPotential <= 0:
                 weights = weights + learning_rate *  currentPoint * currentLabel
 
-    if calculateError(weights, data, dims) == 0:
+    acc = calculateAccuracy(weights, data, dims)
+    if acc == 1:
         return 1 # success, perfect classification
     else:
         return 0 # did not converge or classification not possible
