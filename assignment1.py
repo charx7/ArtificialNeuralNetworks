@@ -37,7 +37,7 @@ def prettyPlot(x, weights):
 
 if __name__ == '__main__':
     # X datapoints in Y dimenions
-    data, weights = generateRandomData(10,20)
+    data, weights = generateRandomData(20,30)
     # Plot you dataz
     #plotData(data)
 
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     # Declare a linspace for the data generated
     x = np.linspace(min, max, 20)
 
-    epochs = 5 # Number of epochs
+    epochs = 10 # Number of epochs
     # Get the dimensions
     dims = data.shape[1] - 1
     # Set the learn rate according to the dims
@@ -78,7 +78,9 @@ if __name__ == '__main__':
 
     # Print decision boundry for viz
     if dims == 2:
+        plt.figure()
         prettyPlot(x, weights)
+        plt.show()
 
     print('The accuracies of our data are: ',accuracies)
     plt.figure()

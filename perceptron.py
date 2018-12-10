@@ -27,9 +27,13 @@ def calculateAccuracy(weights, data, dims):
 def classify(data, epochs, learning_rate, dims):
     # Init weights at 0
     weights = np.zeros(dims)
+    epsilon = 0.01
 
     for i in range(epochs):
+        weights_before = weights
+        weights_after = 10
         numberOfPoints = data.shape[0]
+
         for iter in range(numberOfPoints):
             # Get the current point and reshape it to be able to use the dot-product
             currentPoint = data[iter][0:dims].reshape(1, dims)
@@ -39,6 +43,9 @@ def classify(data, epochs, learning_rate, dims):
             # Check if the dot product is =< 0 to update (there was no need for the i=0 condition)
             if localPotential <= 0:
                 weights = weights + learning_rate *  currentPoint * currentLabel
+
+        weights_after = weights
+
 
     acc = calculateAccuracy(weights, data, dims)
     if acc == 1:
