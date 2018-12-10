@@ -20,7 +20,7 @@ n_d = 50
 # increase Alpha (alpha =0.75,1.0,1.25,...3.0) and obtain Q (the number of successful runs
 # as a function of alpha)
 
-N_values = [20,  50,  100]
+N_values = [20,  50, 70]
 alphas = np.linspace(0.5, 3, 20)
 
 # each row is for one P_value (so we do multiple experiments)
@@ -28,8 +28,9 @@ alphas = np.linspace(0.5, 3, 20)
 # then we can plot the results x,y, since Q is a function of alpha
 Q = np.zeros([len(N_values),len(alphas)])
 
-for i, N in tqdm(enumerate(N_values)):
-    for j, alpha in tqdm(enumerate(alphas)):
+for i, N in enumerate(N_values):
+    print('Computing the l.s. of: ', N, ' dimensional space...\n')
+    for j, alpha in enumerate(tqdm(alphas)):
         P = int(np.round(alpha * N))   # int(np.round(P/alpha))
         success_counter = 0
         epochs = 100
@@ -41,7 +42,7 @@ for i, N in tqdm(enumerate(N_values)):
         Q[i,j] = success_counter/n_d #this describes the probability of sucessful classification for P = i and alpha = j
 
 plt.figure()
-for i in range(1,len(N_values)):
+for i in range(0,len(N_values)):
 
     plt.plot(alphas, Q[i])
     plt.title("Separation probability based on alpha")
