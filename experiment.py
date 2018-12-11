@@ -20,7 +20,7 @@ n_d = 100
 # increase Alpha (alpha =0.75,1.0,1.25,...3.0) and obtain Q (the number of successful runs
 # as a function of alpha)
 
-N_values = [20, 50, 80, 110, 140]
+N_values = [5, 20, 100]
 alphas = np.linspace(0.5, 3, 40)
 
 # each row is for one P_value (so we do multiple experiments)
@@ -33,7 +33,7 @@ for i, N in enumerate(N_values):
     for j, alpha in enumerate(tqdm(alphas)):
         P = int(np.round(alpha * N))   # int(np.round(P/alpha))
         success_counter = 0
-        epochs = 200
+        epochs = 500
         learning_rate = 1.0/N #Number of dimensions
         for trial in range(0, n_d):
             data, weights = generateRandomData(P, N)
