@@ -1,21 +1,12 @@
-# What I don't understand is how to create a smooth curve
-# we evaluate the probabilites only for a few alpha values, right?
-# so its not a continuous function. Thats not a problem, is it?
-# Also I don't understand how to pick the number of epochs and
-# the learning rate. Can we just do what we want?
-
 import numpy as np
 from generateRandomData import generateRandomData
 from perceptron import classify
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
-# Pseudocode:
-# pick P (number of Points)
-# pick an Alpha, that determines the ratio of P/N
-# determine N (number of dimensions) as P/Alpha
 # create n_d independent datasets wit P points and N dimensions
 n_d = 100
+
 # let the perceptron run and check whether it converges
 # increase Alpha (alpha =0.75,1.0,1.25,...3.0) and obtain Q (the number of successful runs
 # as a function of alpha)
