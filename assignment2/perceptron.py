@@ -20,22 +20,33 @@ def classify(data, epochs, learning_rate, dims):
     # Init weights at 0
     weights = np.zeros(dims)
     epsilon = 0.01
+    # get the weights as the first data point (special case for the first)
+    weights = data[0][0:dims]
 
     for i in range(epochs):
-        weights_before = weights
-        weights_after = 10
         numberOfPoints = data.shape[0]
         # Start local potential vector
         # TODO change the stop criteria to a epsilon weights change one
 
-        localPotentialVector = []
+        # Stabilities vector
+        kappasVector = []
         for iter in range(numberOfPoints):
             # Get the current point and reshape it to be able to use the dot-product
-            currentPoint = data[iter][0:dims].reshape(1, dims)
+            currentPoint = data[iter][0:dims]#.reshape(1, dims)
             currentLabel = data[iter][dims]
 
             # Calculate Kappa
-            currentKappa = np.dot(weights, currentPoint * currentLabel) / np.linalg(weights)
+            # currently division by 0 problem
+            currentKappa = np.dot(weights, currentPoint * currentLabel) / np.linalg.norm(weights)
+
+            # append an stability(kappa) dictionary
+            kappasVector.append(currentKappa)
+
+        # Get the min kappa
+        minKappa = min(kappasVector)
+        index_minKappa = np.argmin(kappasVector)
+        #print('\nThe index of min kappa is: \n', index_minKappa)
+        # Do hebbian update
 
     acc = calculateAccuracy(weights, data, dims)
     if acc == 1:

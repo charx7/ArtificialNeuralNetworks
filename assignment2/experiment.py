@@ -22,9 +22,10 @@ alphas = np.linspace(0.5, 3, 40)
 Q = np.zeros([len(N_values),len(alphas)])
 
 for i, N in enumerate(N_values):
-    print('\nComputing the l.s. of: ', N, ' dimensional space...\n')
+    print('\nComputing the minover of: ', N, ' dimensional space...\n')
     for j, alpha in enumerate(tqdm(alphas)):
-        P = int(np.round(alpha * N))   # int(np.round(P/alpha))
+        # How many points are we generating
+        P = int(np.round(alpha * N))   #
         success_counter = 0
         epochs = 500
         learning_rate = 1.0/N #Number of dimensions

@@ -56,10 +56,12 @@ def generateRandomData(dataPoints, dims, teacher):
 
 # Function that generates a random teacher vector
 def generateRandomTeacher(dimensions):
-    return np.sign(np.random.rand(dimensions))
+    print('The norm of the points is: ', np.linalg.norm(np.random.randn(dimensions)))
+    return np.sign(np.random.randn(dimensions))
 
 # Chunk code execution for tests
 def main():
+    from perceptron import classify
     print('Im on main hi!')
     # To be replaced by N
     dimensions = 4
@@ -71,9 +73,15 @@ def main():
 
     # Generate random data points
     data, weights = generateRandomData(20, 4, teacher)
-
     print('The random data is: \n', data)
     print('The random weights are: \n',weights)
+
+    # Run the minover algo
+    epochs = 10 # Number of epochs
+    learning_rate = 1.0 / dimensions #Number of dimensions
+    N = dimensions
+    success_counter = 0 # To be removed
+    success_counter = success_counter + classify(data,epochs,learning_rate, N)
 
 # Execute main function if called from the terminal
 if __name__ == '__main__':
