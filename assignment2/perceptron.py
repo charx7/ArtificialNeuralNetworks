@@ -16,6 +16,11 @@ def calculateAccuracy(weights, data, dims):
 
     return 1-errors/numberOfPoints
 
+def doHebbianUpdate(point_min_kappa, label_min_kappa, learning_rate, old_weights):
+    # Do the hebbian update
+    new_weights = old_weights + (learning_rate* np.dot(point_min_kappa, label_min_kappa))
+    return new_weights
+
 def classify(data, epochs, learning_rate, dims):
     # Init weights at 0
     weights = np.zeros(dims)
@@ -45,8 +50,21 @@ def classify(data, epochs, learning_rate, dims):
         # Get the min kappa
         minKappa = min(kappasVector)
         index_minKappa = np.argmin(kappasVector)
-        #print('\nThe index of min kappa is: \n', index_minKappa)
-        # Do hebbian update
+        # Get the points that are going to be used for the hebbian update
+        point_min_kappa = data[index_minKappa][0:dims]
+        label_min_kappa = data[index_minKappa][dims]
+
+        # Norm calc for the stop criteria
+        old_weights_norm = np.linalg.norm(weights)
+        # Call to the hebbian update function on the points
+        weights = doHebbianUpdate(point_min_kappa, label_min_kappa, learning_rate, weights)
+        # Norm calculation for the stop criteia
+        new_weights_norm = np.linalg.norm(weights)
+        # Stop criteia difference of the norms
+        stop_criteria = abs(new_weights_norm - old_weights_norm)
+        print('The stop criteria is: ', stop_criteria)
+        if stop_criteria < 0.01:
+            print('This should early stop!')
 
     acc = calculateAccuracy(weights, data, dims)
     if acc == 1:
