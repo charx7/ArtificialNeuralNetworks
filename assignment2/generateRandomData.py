@@ -57,7 +57,8 @@ def generateRandomData(dataPoints, dims, teacher):
 # Function that generates a random teacher vector
 def generateRandomTeacher(dimensions):
     print('The norm of the points is: ', np.linalg.norm(np.random.randn(dimensions)))
-    return np.sign(np.random.randn(dimensions))
+    random_weights = np.random.randn(dimensions)
+    return np.sign(random_weights), random_weights
 
 # Chunk code execution for tests
 def main():
@@ -68,9 +69,9 @@ def main():
     dataPoints = 20
 
     # Create the randomly generated teacher perceptron
-    teacher = generateRandomTeacher(dimensions)
+    teacher, teacher_weights = generateRandomTeacher(dimensions)
     print('The norm squared of the teacher is: ', (np.linalg.norm(teacher))**2)
-
+    print('\nThe Teacher weights are: \n', teacher_weights)
     # Generate random data points
     data, weights = generateRandomData(20, 4, teacher)
     print('The random data is: \n', data)

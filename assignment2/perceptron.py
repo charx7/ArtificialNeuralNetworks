@@ -65,6 +65,8 @@ def classify(data, epochs, learning_rate, dims):
         print('The stop criteria is: ', stop_criteria)
         if stop_criteria < 0.01:
             print('This should early stop!')
+            # escape the epoch loop
+            break
 
     acc = calculateAccuracy(weights, data, dims)
     if acc == 1:
