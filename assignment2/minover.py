@@ -1,20 +1,5 @@
 import numpy as np
 
-# TODO determine the generalization error based on the randomly generated "teacher perceptron"
-def calculateAccuracy(weights, data, dims):
-    errors = 0
-    numberOfPoints = data.shape[0]
-    for iter in range(numberOfPoints):
-        currentPoint = data[iter][0:dims].reshape(1, dims)
-        currentLabel = data[iter][dims]
-        # localPotential = np.dot(weights.flatten(), currentPoint.flatten())
-        classification = np.sign(np.dot(weights.flatten(), currentPoint.flatten()))
-        # print('The classification label is: ',classification)
-        # print('The correct label is: ', np.sign(currentLabel))
-        if classification != np.sign(currentLabel):
-             errors = errors + 1
-
-    return 1-errors/numberOfPoints
 
 def doHebbianUpdate(point_min_kappa, label_min_kappa, learning_rate, old_weights):
     # Do the hebbian update
@@ -31,7 +16,6 @@ def classify(data, epochs, learning_rate, dims):
     for i in range(epochs):
         numberOfPoints = data.shape[0]
         # Start local potential vector
-        # TODO change the stop criteria to a epsilon weights change one
 
         # Stabilities vector
         kappasVector = []
@@ -62,14 +46,10 @@ def classify(data, epochs, learning_rate, dims):
         new_weights_norm = np.linalg.norm(weights)
         # Stop criteia difference of the norms
         stop_criteria = abs(new_weights_norm - old_weights_norm)
-        print('The stop criteria is: ', stop_criteria)
+        # print('The stop criteria is: ', stop_criteria)
         if stop_criteria < 0.01:
-            print('This should early stop!')
+            # print('This should early stop!')
             # escape the epoch loop
             break
 
-    acc = calculateAccuracy(weights, data, dims)
-    if acc == 1:
-        return 1 # success, perfect classification
-    else:
-        return 0 # did not converge or classification not possible
+    return weights

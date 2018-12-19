@@ -1,6 +1,8 @@
 print('Im working')
 import numpy as np
 
+
+
 def create_labels(teacher, data):
     # Use the teacher perceptron to generate the data labels
     labels = np.sign(np.dot(teacher, data))
@@ -27,7 +29,7 @@ def generateRandomData(dataPoints, dims, teacher):
     mean = 0
     var = 1
     data = np.random.normal(loc=mean, scale=var, size=dimensions)
-    # print('The shape of our data vector is: \n', data.shape)
+    # print('The shape of our data vector is: \n', data)
 
     # Initialize the weight vectors as zeros
     weightVector = np.zeros((dims,1))
