@@ -62,7 +62,7 @@ def generateRandomTeacher(dimensions):
 
 # Chunk code execution for tests
 def main():
-    from perceptron import classify
+    from minonver import classify
     print('Im on main hi!')
     # To be replaced by N
     dimensions = 4
