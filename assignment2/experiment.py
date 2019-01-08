@@ -11,9 +11,9 @@ n_d = 100
 # increase Alpha (alpha =0.75,1.0,1.25,...3.0) and obtain Q (the number of successful runs
 # as a function of alpha)
 
-N_values = [6, 20, 100]
+N_values = [6, 10, 15]
 
-alphas = np.linspace(0.1, 5, 40)
+alphas = np.linspace(0.1, 5, 80)
 
 # each row is for one P_value (so we do multiple experiments)
 # so row 1 will be the y values for P = 20 and the x values are the alpha values
@@ -29,7 +29,7 @@ def calculateError(weightsStudent, weightsTeacher):
 def generateRandomTeacher(dimensions):
     # print('The norm of the points is: ', np.linalg.norm(np.random.randn(dimensions)))
     random_weights = np.random.randn(dimensions)
-    return np.sign(random_weights), random_weights
+    return random_weights
 
 for i, N in enumerate(N_values):
     print('\nComputing the minover of: ', N, ' dimensional space...\n')
@@ -40,13 +40,13 @@ for i, N in enumerate(N_values):
         epochs = 500
         learning_rate = 1.0/N #Number of dimensions
         for trial in range(0, n_d):
-            labels, teacher = generateRandomTeacher(N)
+            teacher = generateRandomTeacher(N)
             data, weights = generateRandomData(P, N, teacher)
             # the minover.classify function returns the weights after either convergence or max number of epochs
             studentWeights = classify(data,epochs,learning_rate, N)
             # calculate the angle between the studentVector and the teacherVector to get the generalization error
             error_list.append(calculateError(studentWeights, teacher))
-        Q[i,j] = np.mean(error_list) #this describes the probability of sucessful classification for P = i and alpha = j
+        Q[i,j] = np.mean(error_list) #this describes the generalization error for P = i and alpha = j
 
 # TODO Modify labels and pretty plotz
 plt.figure()

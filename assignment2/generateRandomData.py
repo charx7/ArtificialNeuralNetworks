@@ -64,7 +64,7 @@ def generateRandomTeacher(dimensions):
 
 # Chunk code execution for tests
 def main():
-    from minonver import classify
+    from minover import classify
     print('Im on main hi!')
     # To be replaced by N
     dimensions = 4
